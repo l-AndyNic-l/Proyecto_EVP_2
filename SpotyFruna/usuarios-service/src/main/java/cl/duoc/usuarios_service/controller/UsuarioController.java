@@ -1,29 +1,41 @@
 package cl.duoc.usuarios_service.controller;
 
+import cl.duoc.usuarios_service.model.Usuario;
+import cl.duoc.usuarios_service.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping( "/api/v1/usuarios" )
 public class UsuarioController {
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     @GetMapping
-    public String getUsuarios () {
-        return "Get + Usuario";
+    public List<Usuario> findAll() {
+        return usuarioService.findAll();
+    }
+
+    @GetMapping( "/{id}" )
+    public Usuario findById( @PathVariable  Long id ) {
+        return usuarioService.findById(id);
     }
 
     @PostMapping
-    public String postUsuario () {
-        return "Post + Usuario";
+    public Usuario save( @RequestBody Usuario u ) {
+        return usuarioService.save(u);
     }
 
     @PutMapping( "/{id}" )
-    public String putUsuario ( @PathVariable Long id ) {
-        return "Put + Usuario + " + id;
+    public int update( @PathVariable  Long id, @RequestBody Usuario u ) {
+        return usuarioService.update(u, id);
     }
 
     @DeleteMapping( "/{id}" )
-    public String deleteUsuario ( @PathVariable Long id ) {
-        return "Delete + Usuario + " + id;
+    public Boolean delete( @PathVariable  Long id ) {
+        return usuarioService.deleteById(id);
     }
 
 }
