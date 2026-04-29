@@ -38,7 +38,7 @@ def load_select_endpoints_menu(API: str):
     while True:
         #SCREEN
         os.system('cls')
-        print(screen_endpoints_menu(api_url_title_plural(API)))
+        print(screen_endpoints_menu(api_plural(API)))
         option = input("Seleccione una opción (0-2): ")
         os.system('cls')
         #OPTIONS
@@ -63,7 +63,7 @@ def load_crud_menu(API: str):
     while True:
         #SCREEN
         os.system('cls')
-        print(screen_crud_menu(api_url_title_plural(API)))
+        print(screen_crud_menu(api_plural(API)))
         option = input("Seleccione una opción (0-4): ")
         os.system('cls')
         #OPTIONS
@@ -93,7 +93,7 @@ def load_crud_get_menu(API: str) -> str:
     while True:
         #SCREEN
         os.system('cls')
-        print(screen_crud_get_menu(api_url_title_plural(API)))
+        print(screen_crud_get_menu(api_plural(API)))
         option = input("Seleccione una opción (0-2): ")
         os.system('cls')
         #GET FINDALL
@@ -101,7 +101,7 @@ def load_crud_get_menu(API: str) -> str:
             crud_get_findAll(API)
         #GET FINDONE
         elif option == '2':
-            crud_get_findOne(API)
+            crud_get_findById(API)
         elif option == '0':
             break
         #VALIDATION

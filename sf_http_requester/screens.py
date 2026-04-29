@@ -49,7 +49,20 @@ def screen_crud_get_findAll_menu(API: str) -> str:
 === Listando {API} ===
 """
 
-def screen_crud_get_findOne_menu(API: str) -> str:
+def screen_crud_get_findById_menu(API: str) -> str:
     return f"""
-=== Buscando {API[:1]} ===
+=== Buscando {API} ===
+"""
+
+def screen_crud_post_save_menu(API: str) -> str:
+    return f"""
+=== Creando {API} ===
+"""
+def screen_crud_put_update_menu(API: str) -> str:
+    return f"""
+=== Actualizando {API} ===
+"""
+def screen_crud_delete_menu(API: str) -> str:
+    return f"""
+=== Eliminando {API} ===
 """
