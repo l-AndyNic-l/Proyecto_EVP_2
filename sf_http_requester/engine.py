@@ -14,27 +14,49 @@ def load_main_menu(APIs: list):
         #SCREEN
         os.system('cls')
         print(screen_main_menu())
-        option = input("Seleccione una opción (0-3): ")
+        option = input(f"Seleccione una opción (0-{len(APIs)}): ")
         os.system('cls')
+        #SCREEN
+
         #OPTIONS
-        #API_1
-        if option == '1':
-            load_crud_menu(APIs[0])
-        #API_2
-        elif option == '2':
-            load_crud_menu(APIs[1])
-        #API_3
-        elif option == '3':
-            load_crud_menu(APIs[2])
-        #END PROGRAM
-        elif option == '0':
+        if option == '0':
             print("...Saliendo del programa...")
             time.sleep(1)
+            break
+
+        for index, api_url in enumerate(APIs, start=1):
+            if option == str(index):
+                load_select_endpoints_menu(api_url)
+                break
+        else:
+            print("\nOpción ingresada inválida.")
+
+        #PAUSE
+        print("\n...Presione un boton para continuar...")
+        msvcrt.getch()
+
+def load_select_endpoints_menu(API: str):
+    while True:
+        #SCREEN
+        os.system('cls')
+        request_status(API)
+        print()
+        option = input("Seleccione una opción (0-2): ")
+        os.system('cls')
+        #OPTIONS
+        #API MAIN ENDPOINTS
+        if option == '1':
+            pass
+        #API CRUD ENDPOINTS
+        elif option == '2':
+            load_crud_menu(API)
+        #RETURN TO MAIN MENU
+        elif option == '0':
             break
         #VALIDATION
         else:
             print("\nOpción ingresada inválida.")
-        #PAUSE
+            #PAUSE
         print("\n...Presione un boton para continuar...")
         msvcrt.getch()
 
@@ -49,26 +71,7 @@ def load_crud_menu(API: str):
         #OPTIONS
         #HTTP GET
         if option == '1':
-            #HTTP_GET_MENU
-            while True:
-                #SCREEN
-                os.system('cls')
-                print(screen_get_menu())
-                option = input("Seleccione una opción (0-2): ")
-                os.system('cls')
-                #OPTIONS
-                #HTTP GET ALL OBJECTS
-                if option == '1':
-                    get_all_objetos(API)
-                #HTTP GET ONE OBJECT
-                elif option == '0':
-                    get_one_objeto(API)
-                #VALIDATION
-                else:
-                    print("\nOpción ingresada inválida.")
-                    #PAUSE
-                    print("\n...Presione un boton para continuar...")
-                    msvcrt.getch()
+            pass
         #HTTP POST
         elif option == '2':
             pass
@@ -80,8 +83,6 @@ def load_crud_menu(API: str):
             pass
         #END PROGRAM
         elif option == '0':
-            print("...Saliendo del programa...")
-            time.sleep(1)
             break
         #VALIDATION
         else:
@@ -89,4 +90,3 @@ def load_crud_menu(API: str):
         #PAUSE
         print("\n...Presione un boton para continuar...")
         msvcrt.getch()
-

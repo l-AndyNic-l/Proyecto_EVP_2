@@ -1,10 +1,19 @@
 def screen_main_menu() -> str:
     return """
-=== HTTP Requests Skeleton ===
-1. API_1.
-2. API_2.
-3. API_3.
-0. Terminar programa.
+=== SpotyFruna HTTP Requester ===
+
+1.  Administradores API.
+2.  Artistas API.
+3.  Usuarios API.
+4.  Clientes API.
+5.  Canciones API.
+6.  Contenido API.
+7.  Busquedas API.
+8.  Listas API.
+9.  Albumes API.
+10. Seguridades API.
+11. Soportes API.
+0.  Terminar programa.
 """
 
 def screen_crud_menu() -> str:
@@ -16,21 +25,3 @@ def screen_crud_menu() -> str:
 4. Delete.
 0. Volver al menu principal.
 """
-
-def screen_get_menu() -> str: 
-    return """
-=== HTTP Get Requests ===
-1. Listar todo.
-2. Buscar uno.
-0. Volver al menu anterior.
-"""
-
-def screen_get_menu_objeto_format(mascota) -> str:
-    return f"""
-ID: {mascota["id"]}
-Nombre: {mascota["nombre"]}
-Raza: {mascota["raza"]}
-Genero: {mascota["genero"]}
-Fecha Nacimiento: {mascota["fechaDeNacimiento"]}
-"""
-
