@@ -1,0 +1,50 @@
+package cl.duoc.auth_service.mapper;
+
+import cl.duoc.auth_service.clients.UsuariosFeign;
+import cl.duoc.auth_service.dto.AuthDTO;
+import cl.duoc.auth_service.dto.UsuarioDTO;
+import cl.duoc.auth_service.model.Auth;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.text.SimpleDateFormat;
+
+@Component
+public class AuthMapper {
+
+    @Autowired
+    private UsuariosFeign usuarios;
+
+    public AuthDTO toDTO(Auth a) {
+        if(a == null) {
+            return null;
+        }
+
+        AuthDTO dtoAuth = new AuthDTO();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        UsuarioDTO dtoUsuario = usuarios.findById(a.getUsuario());
+
+        dtoAuth.setId(a.getId());
+        dtoAuth.setFechaRegistro(sdf.format(a.getFechaRegistro()));
+
+        if (a.getFechaExpiracion() != null) {
+            dtoAuth.setFechaExpiracion(sdf.format(a.getFechaExpiracion()));
+
+        } else {
+            dtoAuth.setFechaExpiracion( "Sin Fecha de Expiracion" );
+        }
+
+        if (a.getEstado() != null) {
+            dtoAuth.setEstado( a.getEstado().getNombre() );
+
+        } else {
+            dtoAuth.setEstado( "Sin Estado" );
+        }
+
+        dtoAuth.setToken(a.getToken());
+        dtoAuth.setUsuario(dtoUsuario);
+
+        return dtoAuth;
+    }
+
+}

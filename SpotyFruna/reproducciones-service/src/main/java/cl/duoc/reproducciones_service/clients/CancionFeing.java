@@ -1,0 +1,14 @@
+package cl.duoc.reproducciones_service.clients;
+
+import cl.duoc.reproducciones_service.dto.CancionDTO;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+@FeignClient( name = "canciones-service", url = "http://localhost:8080/api/v1/canciones")
+public interface CancionFeing {
+
+    @GetMapping( "/{id}" )
+    CancionDTO findById( @PathVariable Long id );
+
+}
