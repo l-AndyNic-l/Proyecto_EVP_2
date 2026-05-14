@@ -4,7 +4,6 @@ import cl.duoc.playlists_service.model.Privacidad;
 import cl.duoc.playlists_service.service.PrivacidadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -15,29 +14,31 @@ public class PrivacidadController {
     @Autowired
     private PrivacidadService privacidadService;
 
+
+
     @GetMapping
     public List<Privacidad> findAll() {
         return privacidadService.findAll();
     }
 
-    @GetMapping( "/{id}" )
-    public Optional<Privacidad> findById(@PathVariable Long id) {
-        return privacidadService.findById(id);
+    @GetMapping( "/{idPrivacidad}" )
+    public Optional<Privacidad> findById(@PathVariable Long idPrivacidad) {
+        return privacidadService.findById(idPrivacidad);
     }
 
     @PostMapping
-    public Privacidad save(@RequestBody Privacidad p) {
-        return privacidadService.save(p);
+    public Privacidad save(@RequestBody Privacidad privacidad) {
+        return privacidadService.save(privacidad);
     }
 
-    @PutMapping( "/{id}" )
-    public Privacidad update(@PathVariable Long id, @RequestBody Privacidad p) {
-        return privacidadService.update(id, p);
+    @PutMapping( "/{idPrivacidad}" )
+    public Privacidad update(@PathVariable Long idPrivacidad, @RequestBody Privacidad privacidad) {
+        return privacidadService.update(idPrivacidad, privacidad);
     }
 
-    @DeleteMapping("/{id}")
-    public Boolean delete(@PathVariable Long id) {
-        return privacidadService.deleteById(id);
+    @DeleteMapping("/{idPrivacidad}")
+    public Boolean delete(@PathVariable Long idPrivacidad) {
+        return privacidadService.deleteById(idPrivacidad);
     }
 
 }

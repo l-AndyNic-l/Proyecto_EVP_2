@@ -15,29 +15,31 @@ public class AlbumController {
     @Autowired
     private AlbumService albumService;
 
+
+
     @GetMapping
     public List<AlbumDTO> findAll() {
         return albumService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public AlbumDTO findById( @PathVariable Long id ) {
-        return albumService.findById(id);
+    @GetMapping("/{idAlbum}")
+    public AlbumDTO findById(@PathVariable Long idAlbum) {
+        return albumService.findById(idAlbum);
     }
 
     @PostMapping
-    public Album save(@RequestBody Album a) {
-        return albumService.save(a);
+    public Album save(@RequestBody Album album) {
+        return albumService.save(album);
     }
 
-    @PutMapping("/{id}")
-    public Album update(@PathVariable Long id, @RequestBody Album a) {
-        return albumService.update(id, a);
+    @PutMapping("/{idAlbum}")
+    public Album update(@PathVariable Long idAlbum, @RequestBody Album album) {
+        return albumService.update(idAlbum, album);
     }
 
-    @DeleteMapping("/{id}")
-    public Boolean delete(@PathVariable Long id) {
-        return albumService.deleteById(id);
+    @DeleteMapping("/{idAlbum}")
+    public Boolean delete(@PathVariable Long idAlbum) {
+        return albumService.deleteById(idAlbum);
     }
 
 }

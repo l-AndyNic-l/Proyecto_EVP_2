@@ -4,7 +4,6 @@ import cl.duoc.auth_service.model.Auth;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
@@ -23,4 +22,5 @@ public interface AuthRepository extends JpaRepository<Auth, Long> {
 
     @Query(value = "select * from auth where fecha_registro >= to_date(:fecha_ini, 'yyyy-mm-dd') and fecha_registro < to_date(:fecha_ter, 'yyyy-mm-dd')", nativeQuery = true)
     List<Auth> findAllByEntreFechas(String fecha_ini, String fecha_ter);
+
 }

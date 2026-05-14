@@ -1,6 +1,6 @@
 package cl.duoc.auth_service.mapper;
 
-import cl.duoc.auth_service.clients.UsuariosFeign;
+import cl.duoc.auth_service.clients.UsuarioClient;
 import cl.duoc.auth_service.dto.AuthDTO;
 import cl.duoc.auth_service.dto.UsuarioDTO;
 import cl.duoc.auth_service.model.Auth;
@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 public class AuthMapper {
 
     @Autowired
-    private UsuariosFeign usuarios;
+    private UsuarioClient usuarios;
 
     public AuthDTO toDTO(Auth a) {
         if(a == null) {

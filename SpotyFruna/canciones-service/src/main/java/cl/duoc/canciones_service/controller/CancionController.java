@@ -1,11 +1,10 @@
 package cl.duoc.canciones_service.controller;
 
-import cl.duoc.canciones_service.dto.CancionDTO;
 import cl.duoc.canciones_service.model.Cancion;
+import cl.duoc.canciones_service.dto.CancionDTO;
 import cl.duoc.canciones_service.service.CancionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -15,34 +14,36 @@ public class CancionController {
     @Autowired
     private CancionService cancionService;
 
+
+
     @GetMapping
     public List<CancionDTO> findAll() {
         return cancionService.findAll();
     }
 
-    @GetMapping( "/{id}" )
-    public CancionDTO findById(@PathVariable Long id) {
-        return cancionService.findById(id);
+    @GetMapping( "/{idCancion}" )
+    public CancionDTO findById(@PathVariable Long idCancion) {
+        return cancionService.findById(idCancion);
     }
 
-    @GetMapping("/list/{idList}")
-    public List<CancionDTO> findAllAlbumCanciones(@PathVariable Long idAlbum) {
-        return cancionService.findAllAlbumCanciones(idAlbum);
+    @GetMapping("/album/{idAlbum}")
+    public List<CancionDTO> findAllCancionesByAlbum(@PathVariable Long idAlbum) {
+        return cancionService.findAllCancionesByAlbum(idAlbum);
     }
 
     @PostMapping
-    public Cancion save(@RequestBody Cancion c) {
-        return cancionService.save(c);
+    public Cancion save(@RequestBody Cancion cancion) {
+        return cancionService.save(cancion);
     }
 
-    @PutMapping( "/{id}" )
-    public Cancion update(@PathVariable Long id, @RequestBody Cancion c) {
-        return cancionService.update(id, c);
+    @PutMapping( "/{idCancion}" )
+    public Cancion update(@PathVariable Long idCancion, @RequestBody Cancion cancion) {
+        return cancionService.update(idCancion, cancion);
     }
 
-    @DeleteMapping( "/{id}" )
-    public Boolean delete(@PathVariable  Long id) {
-        return cancionService.deleteById(id);
+    @DeleteMapping( "/{idCancion}" )
+    public Boolean delete(@PathVariable  Long idCancion) {
+        return cancionService.deleteById(idCancion);
     }
 
 }

@@ -12,6 +12,6 @@ import java.util.List;
 public interface CancionClient {
 
     @GetMapping("/list/{idList}")
-    List<CancionDTO> findAllListCanciones(@PathVariable Long idList);
+    List<CancionDTO> findAllCancionesByAlbum(@PathVariable Long idAlbum);
 
 }

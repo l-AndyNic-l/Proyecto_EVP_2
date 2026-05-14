@@ -11,6 +11,8 @@ public class EstadoController {
     @Autowired
     private EstadoService estadoService;
 
+
+
     @GetMapping
     public List<Estado> findAll() {
         return estadoService.findAll();
@@ -26,14 +28,14 @@ public class EstadoController {
         return estadoService.save(estado);
     }
 
-    @PutMapping( "/{id}" )
-    public Estado update(@PathVariable Long id, @RequestBody Estado estado) {
-        return estadoService.update(id, estado);
+    @PutMapping( "/{idEstado}" )
+    public Estado update(@PathVariable Long idEstado, @RequestBody Estado estado) {
+        return estadoService.update(idEstado, estado);
     }
 
-    @DeleteMapping( "/{id}" )
-    public Boolean deleteById(@PathVariable Long id){
-        return estadoService.deleteById(id);
+    @DeleteMapping( "/{idEstado}" )
+    public Boolean deleteById(@PathVariable Long idEstado){
+        return estadoService.deleteById(idEstado);
     }
 
 }

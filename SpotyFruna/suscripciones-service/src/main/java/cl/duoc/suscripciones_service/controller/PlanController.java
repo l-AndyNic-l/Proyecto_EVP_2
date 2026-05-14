@@ -15,29 +15,31 @@ public class PlanController {
     @Autowired
     private PlanService planService;
 
+
+
     @GetMapping
     public List<Plan> findAll() {
         return planService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Plan> findById(@PathVariable Long id) {
-        return planService.findById(id);
+    public Optional<Plan> findById(@PathVariable Long idPlan) {
+        return planService.findById(idPlan);
     }
 
     @PostMapping
-    public Plan save(@RequestBody Plan p) {
-        return planService.save(p);
+    public Plan save(@RequestBody Plan plan) {
+        return planService.save(plan);
     }
 
     @PutMapping("/{id}")
-    public Plan update(@PathVariable Long id, @RequestBody Plan p) {
-        return planService.update(id, p);
+    public Plan update(@PathVariable Long idPlan, @RequestBody Plan plan) {
+        return planService.update(idPlan, plan);
     }
 
     @DeleteMapping("/{id}")
-    public Boolean delete(@PathVariable  Long id) {
-        return planService.deleteById(id);
+    public Boolean delete(@PathVariable Long idPlan) {
+        return planService.deleteById(idPlan);
     }
 
 }

@@ -14,14 +14,16 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+
+
     @GetMapping
     public List<AuthDTO> findAll(){
         return authService.findAll();
     }
 
-    @GetMapping( "/usuario/{id}" )
-    public List<AuthDTO> findAllByUsuario(@PathVariable("id") Long id){
-        return authService.findAllByUsuario(id);
+    @GetMapping( "/usuario/{idUsuario}" )
+    public List<AuthDTO> findAllByUsuario(@PathVariable("idUsuario") Long idUsuario){
+        return authService.findAllByUsuario(idUsuario);
     }
 
     @GetMapping( "/anio" )
@@ -49,9 +51,9 @@ public class AuthController {
         return authService.save(r);
     }
 
-    @PutMapping( "/{id}" )
-    public Auth update(@PathVariable Long id, @RequestBody Auth a) {
-        return authService.update(id, a);
+    @PutMapping( "/{idAuth}" )
+    public Auth update(@PathVariable Long idAuth, @RequestBody Auth auth) {
+        return authService.update(idAuth, auth);
     }
 
 }

@@ -2,8 +2,8 @@ package cl.duoc.playlists_service.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
@@ -32,6 +32,6 @@ public class Playlist {
     private Privacidad privacidad;
 
     @Column(nullable = false)
-    private Long usuario;
+    private Long idUsuario;
 
 }

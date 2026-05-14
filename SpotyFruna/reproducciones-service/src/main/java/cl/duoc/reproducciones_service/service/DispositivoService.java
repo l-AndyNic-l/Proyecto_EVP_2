@@ -12,37 +12,36 @@ public class DispositivoService {
     @Autowired
     private DispositivoRepository dispositivoRepository;
 
+
+
     public List<Dispositivo> findAll() {
         return dispositivoRepository.findAll();
     }
 
-    public Dispositivo findByNombre( String nombre ) {
+    public Dispositivo findByNombre(String nombre) {
         return dispositivoRepository.findByNombre(nombre);
     }
 
-    public Dispositivo save( Dispositivo d ) {
-        return dispositivoRepository.save(d);
+    public Dispositivo save(Dispositivo dispositivo) {
+        return dispositivoRepository.save(dispositivo);
     }
 
-    public Dispositivo update( Long id,  Dispositivo d ) {
-        if( dispositivoRepository.existsById( id ) ) {
+    public Dispositivo update(Long idDispositivo,  Dispositivo dispositivoNuevo) {
+        if( dispositivoRepository.existsById(idDispositivo)) {
+            Dispositivo dispositivo = dispositivoRepository.findById(idDispositivo).orElse(null);
 
-            Dispositivo dispositivo = dispositivoRepository.findById(id).orElse(null);
-            dispositivo.setNombre( d.getNombre() );
+            dispositivo.setNombre(dispositivoNuevo.getNombre());
 
             return dispositivoRepository.save(dispositivo);
-
         } else {
             return null;
         }
     }
 
-    public Boolean delete( Long id ) {
-        if( dispositivoRepository.existsById( id ) ) {
-
-            dispositivoRepository.deleteById( id );
+    public Boolean delete(Long idDispositivo) {
+        if( dispositivoRepository.existsById(idDispositivo)) {
+            dispositivoRepository.deleteById(idDispositivo);
             return true;
-
         } else {
             return false;
         }

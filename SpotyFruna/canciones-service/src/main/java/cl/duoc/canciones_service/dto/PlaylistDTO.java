@@ -1,7 +1,7 @@
 package cl.duoc.canciones_service.dto;
+
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
-
 import java.time.LocalDateTime;
 import java.util.List;
 

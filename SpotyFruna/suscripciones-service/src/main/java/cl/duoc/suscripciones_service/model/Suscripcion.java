@@ -1,8 +1,8 @@
 package cl.duoc.suscripciones_service.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
@@ -31,6 +31,6 @@ public class Suscripcion {
     private Plan plan;
 
     @Column(nullable = false)
-    private Long id_usuario;
+    private Long idUsuario;
 
 }

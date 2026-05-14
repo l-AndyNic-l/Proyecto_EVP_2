@@ -19,7 +19,7 @@ public class SuscripcionMapper {
         dto.setFechaTermino(s.getFechaTermino());
         dto.setActivado(s.getActivado());
         dto.setIdPlan(s.getPlan().getId());
-        dto.setIdUsuario(s.getId_usuario());
+        dto.setIdUsuario(s.getIdUsuario());
 
         return dto;
     }

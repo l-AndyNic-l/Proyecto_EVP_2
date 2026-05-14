@@ -1,9 +1,9 @@
 package cl.duoc.usuarios_service.service;
 
-import cl.duoc.usuarios_service.dto.UsuarioDTO;
-import cl.duoc.usuarios_service.mapper.UsuarioMapper;
 import cl.duoc.usuarios_service.model.Usuario;
 import cl.duoc.usuarios_service.repository.UsuarioRepository;
+import cl.duoc.usuarios_service.dto.UsuarioDTO;
+import cl.duoc.usuarios_service.mapper.UsuarioMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,51 +19,51 @@ public class UsuarioService {
     @Autowired
     private UsuarioMapper mapper;
 
-    public List<UsuarioDTO> findAll() {
-        List<UsuarioDTO> listado = new ArrayList<>();
 
-        for(Usuario u : usuarioRepository.findAll()) {
-            UsuarioDTO u_dto = mapper.toDTO(u);
-            listado.add(u_dto);
+
+    public List<UsuarioDTO> findAll() {
+        List<UsuarioDTO> usuariosDTO = new ArrayList<>();
+
+        for(Usuario usuario : usuarioRepository.findAll()) {
+            UsuarioDTO usuarioDTO = mapper.toDTO(usuario);
+            usuariosDTO.add(usuarioDTO);
         }
 
-        return listado;
+        return usuariosDTO;
     }
 
-    public UsuarioDTO findById(Long id) {
-        Usuario u =  usuarioRepository.findById(id).orElse(null);
-        return mapper.toDTO(u);
+    public UsuarioDTO findById(Long idUsuario) {
+        Usuario usuario =  usuarioRepository.findById(idUsuario).orElse(null);
+        return mapper.toDTO(usuario);
     }
 
-    public Usuario save(Usuario u) {
-        return usuarioRepository.save(u);
+    public Usuario save(Usuario usuario) {
+        return usuarioRepository.save(usuario);
     }
 
-    public Usuario update(Long id, Usuario u) {
-        if ( usuarioRepository.existsById(id) ) {
-            Usuario usuarioExistente = usuarioRepository.findById(id).orElse(null);
-            usuarioExistente.setNombre(u.getNombre());
-            usuarioExistente.setApellido(u.getApellido());
-            usuarioExistente.setNickname(u.getNickname());
-            usuarioExistente.setEmail(u.getEmail());
-            usuarioExistente.setPassword(u.getPassword());
-            usuarioExistente.setFechaNacimiento(u.getFechaNacimiento());
-            usuarioExistente.setCelular(u.getCelular());
-            usuarioExistente.setTipoUsuario(u.getTipoUsuario());
+    public Usuario update(Long idUsuario, Usuario usuarioNuevo) {
+        if (usuarioRepository.existsById(idUsuario)) {
+            Usuario usuario = usuarioRepository.findById(idUsuario).orElse(null);
+
+            usuario.setNombre(usuarioNuevo.getNombre());
+            usuario.setApellido(usuarioNuevo.getApellido());
+            usuario.setNickname(usuarioNuevo.getNickname());
+            usuario.setEmail(usuarioNuevo.getEmail());
+            usuario.setPassword(usuarioNuevo.getPassword());
+            usuario.setFechaNacimiento(usuarioNuevo.getFechaNacimiento());
+            usuario.setCelular(usuarioNuevo.getCelular());
+            usuario.setTipoUsuario(usuarioNuevo.getTipoUsuario());
             
-            return usuarioRepository.save(usuarioExistente);
-
+            return usuarioRepository.save(usuario);
         } else {
             return null;
         }
     }
 
-    public Boolean deleteById(Long id) {
-        if( usuarioRepository.existsById(id) ) {
-
-            usuarioRepository.deleteById(id);
+    public Boolean deleteById(Long idUsuario) {
+        if( usuarioRepository.existsById(idUsuario) ) {
+            usuarioRepository.deleteById(idUsuario);
             return true;
-
         } else {
             return false;
         }

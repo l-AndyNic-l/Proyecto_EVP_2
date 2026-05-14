@@ -1,12 +1,11 @@
 package cl.duoc.auth_service.service;
 
-import cl.duoc.auth_service.dto.AuthDTO;
-import cl.duoc.auth_service.mapper.AuthMapper;
 import cl.duoc.auth_service.model.Auth;
 import cl.duoc.auth_service.repository.AuthRepository;
+import cl.duoc.auth_service.dto.AuthDTO;
+import cl.duoc.auth_service.mapper.AuthMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,86 +18,87 @@ public class AuthService {
     @Autowired
     private AuthMapper mapper;
 
-    public List<AuthDTO>  findAll() {
-        List<AuthDTO> listado = new ArrayList<>();
 
-        for (Auth a : authRepository.findAll()) {
-            AuthDTO a_dto = mapper.toDTO(a);
-            listado.add(a_dto);
+
+    public List<AuthDTO>  findAll() {
+        List<AuthDTO> authsDTO = new ArrayList<>();
+
+        for (Auth auth : authRepository.findAll()) {
+            AuthDTO authDTO = mapper.toDTO(auth);
+            authsDTO.add(authDTO);
         }
 
-        return listado;
+        return authsDTO;
     }
 
-    public List<AuthDTO> findAllByUsuario(Long id) {
-        List<AuthDTO> listado = new ArrayList<>();
+    public List<AuthDTO> findAllByUsuario(Long idUsuario) {
+        List<AuthDTO> authsDTO = new ArrayList<>();
 
-        for (Auth a : authRepository.findAllByUsuario(id)) {
-            AuthDTO a_dto = mapper.toDTO(a);
-            listado.add(a_dto);
+        for (Auth auth : authRepository.findAllByUsuario(idUsuario)) {
+            AuthDTO authDTO = mapper.toDTO(auth);
+            authsDTO.add(authDTO);
         }
 
-        return listado;
+        return authsDTO;
     }
 
     public List<AuthDTO> findAllByAnio(int anio) {
-        List<AuthDTO> listado = new ArrayList<>();
+        List<AuthDTO> authsDTO = new ArrayList<>();
 
-        for(Auth a : authRepository.findAllByAnio(anio)) {
-            AuthDTO a_dto = mapper.toDTO(a);
-            listado.add(a_dto);
+        for(Auth auth : authRepository.findAllByAnio(anio)) {
+            AuthDTO authDTO = mapper.toDTO(auth);
+            authsDTO.add(authDTO);
         }
 
-        return listado;
+        return authsDTO;
     }
 
     public List<AuthDTO> findAllByMes(int mes, int anio) {
-        List<AuthDTO> listado = new ArrayList<>();
+        List<AuthDTO> authsDTO = new ArrayList<>();
 
-        for(Auth a : authRepository.findAllByMes(mes, anio)) {
-            AuthDTO a_dto = mapper.toDTO(a);
-            listado.add(a_dto);
+        for(Auth auth : authRepository.findAllByMes(mes, anio)) {
+            AuthDTO authDTO = mapper.toDTO(auth);
+            authsDTO.add(authDTO);
         }
 
-        return listado;
+        return authsDTO;
     }
 
     public List<AuthDTO> findAllByDia(int dia, int mes, int anio) {
-        List<AuthDTO> listado = new ArrayList<>();
+        List<AuthDTO> authsDTO = new ArrayList<>();
 
-        for(Auth a : authRepository.findAllByDia(dia, mes, anio)) {
-            AuthDTO a_dto = mapper.toDTO(a);
-            listado.add(a_dto);
+        for(Auth auth : authRepository.findAllByDia(dia, mes, anio)) {
+            AuthDTO authDTO = mapper.toDTO(auth);
+            authsDTO.add(authDTO);
         }
 
-        return listado;
+        return authsDTO;
     }
 
     public List<AuthDTO> findAllByEntreFechas(String fecha_ini, String fecha_ter) {
-        List<AuthDTO> listado = new ArrayList<>();
+        List<AuthDTO> authsDTO = new ArrayList<>();
 
-        for(Auth r : authRepository.findAllByEntreFechas(fecha_ini, fecha_ter)) {
-            AuthDTO r_dto = mapper.toDTO(r);
-            listado.add(r_dto);
+        for(Auth auth : authRepository.findAllByEntreFechas(fecha_ini, fecha_ter)) {
+            AuthDTO authDTO = mapper.toDTO(auth);
+            authsDTO.add(authDTO);
         }
 
-        return listado;
+        return authsDTO;
     }
 
-    public Auth save(Auth a) {
-        return authRepository.save(a);
+    public Auth save(Auth auth) {
+        return authRepository.save(auth);
     }
 
-    public Auth update(Long id, Auth a) {
-        if ( authRepository.existsById( id ) ) {
+    public Auth update(Long idAuth, Auth authNuevo) {
+        if (authRepository.existsById(idAuth)) {
+            Auth auth = authRepository.findById( idAuth ).orElse(null);
 
-            Auth auth = authRepository.findById( id ).orElse(null);
-            auth.setEstado( a.getEstado() );
-            auth.setFechaExpiracion( a.getFechaExpiracion() );
+            auth.setEstado( authNuevo.getEstado() );
+            auth.setFechaExpiracion( authNuevo.getFechaExpiracion() );
 
-            return authRepository.save( auth );
-
-        } else  {
+            return authRepository.save(auth);
+        } else {
             return null;
         }
     }

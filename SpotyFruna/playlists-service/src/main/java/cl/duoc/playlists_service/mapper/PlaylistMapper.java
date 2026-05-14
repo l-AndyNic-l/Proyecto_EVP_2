@@ -1,12 +1,10 @@
 package cl.duoc.playlists_service.mapper;
 
-
-import cl.duoc.playlists_service.dto.CancionDTO;
-import cl.duoc.playlists_service.dto.PlaylistDTO;
-import cl.duoc.playlists_service.dto.UsuarioDTO;
 import cl.duoc.playlists_service.model.Playlist;
+import cl.duoc.playlists_service.dto.PlaylistDTO;
+import cl.duoc.playlists_service.dto.CancionDTO;
+import cl.duoc.playlists_service.dto.UsuarioDTO;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component

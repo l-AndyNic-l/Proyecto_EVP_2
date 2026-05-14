@@ -14,6 +14,8 @@ public class TipoUsuarioController {
     @Autowired
     TipoUsuarioService tipoUsuarioService;
 
+
+
     @GetMapping
     public List<TipoUsuario> findAll() {
         return tipoUsuarioService.findAll();
@@ -29,14 +31,14 @@ public class TipoUsuarioController {
         return tipoUsuarioService.save(tipoUsuario);
     }
 
-    @PutMapping( "/{id}" )
-    public TipoUsuario update(@PathVariable Long id, @RequestBody TipoUsuario tipoUsuario) {
-        return tipoUsuarioService.update(id, tipoUsuario);
+    @PutMapping( "/{idTipoUsuario}" )
+    public TipoUsuario update(@PathVariable Long idTipoUsuario, @RequestBody TipoUsuario tipoUsuario) {
+        return tipoUsuarioService.update(idTipoUsuario, tipoUsuario);
     }
 
-    @DeleteMapping( "/{id}" )
-    public Boolean deleteById(@PathVariable Long id){
-        return tipoUsuarioService.deleteById(id);
+    @DeleteMapping( "/{idTipoUsuario}" )
+    public Boolean deleteById(@PathVariable Long idTipoUsuario){
+        return tipoUsuarioService.deleteById(idTipoUsuario);
     }
 
 }

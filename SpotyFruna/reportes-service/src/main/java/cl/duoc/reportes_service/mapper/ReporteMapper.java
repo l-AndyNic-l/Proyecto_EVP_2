@@ -1,8 +1,8 @@
 package cl.duoc.reportes_service.mapper;
 
+import cl.duoc.reportes_service.model.Reporte;
 import cl.duoc.reportes_service.dto.ReporteDTO;
 import cl.duoc.reportes_service.dto.UsuarioDTO;
-import cl.duoc.reportes_service.model.Reporte;
 import org.springframework.stereotype.Component;
 import java.text.SimpleDateFormat;
 
@@ -25,15 +25,14 @@ public class ReporteMapper {
 
         if(reporte.getFechaResuelto() != null) {
             reporteDTO.setFechaResuelto(sdf.format(reporte.getFechaResuelto()));
-
         } else {
             reporteDTO.setFechaResuelto("No Resuelto");
         }
 
         reporteDTO.setTipoReporte(reporte.getTipoReporte().getNombre());
         reporteDTO.setEstado(reporte.getEstado().getNombre());
-        return reporteDTO;
 
+        return reporteDTO;
     }
 
 }

@@ -1,6 +1,5 @@
 package cl.duoc.suscripciones_service.dto;
 
-import cl.duoc.suscripciones_service.model.Plan;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 

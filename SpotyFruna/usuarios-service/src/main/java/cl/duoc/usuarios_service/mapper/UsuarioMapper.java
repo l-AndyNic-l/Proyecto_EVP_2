@@ -1,7 +1,7 @@
 package cl.duoc.usuarios_service.mapper;
 
-import cl.duoc.usuarios_service.dto.UsuarioDTO;
 import cl.duoc.usuarios_service.model.Usuario;
+import cl.duoc.usuarios_service.dto.UsuarioDTO;
 import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.Period;
@@ -26,7 +26,7 @@ public class UsuarioMapper {
         dto.setEdad(edad);
         dto.setCelular(u.getCelular());
 
-        if ( u.getTipoUsuario() != null ) {
+        if (u.getTipoUsuario() != null) {
             dto.setTipoUsuario(u.getTipoUsuario().getNombre());
 
         } else {

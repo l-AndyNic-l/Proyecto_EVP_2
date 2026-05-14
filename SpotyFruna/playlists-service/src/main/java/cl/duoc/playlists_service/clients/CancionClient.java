@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "canciones-service", url = "http://localhost:8080/api/v1/canciones")
 public interface CancionClient {
 
-    @GetMapping("/list/{idPlaylist}")
-    CancionDTO findAllPlaylistCanciones(@PathVariable Long idPlaylist);
+    @GetMapping("/{idCancion}")
+    CancionDTO findById(@PathVariable Long idCancion);
 
-    CancionDTO findById(Long idCancion);
 }

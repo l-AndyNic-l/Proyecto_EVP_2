@@ -1,14 +1,13 @@
 package cl.duoc.albumes_service.service;
 
-import cl.duoc.albumes_service.clients.CancionClient;
-import cl.duoc.albumes_service.dto.CancionDTO;
 import cl.duoc.albumes_service.model.Album;
-import cl.duoc.albumes_service.mapper.AlbumMapper;
-import cl.duoc.albumes_service.dto.AlbumDTO;
 import cl.duoc.albumes_service.repository.AlbumRepository;
+import cl.duoc.albumes_service.dto.AlbumDTO;
+import cl.duoc.albumes_service.dto.CancionDTO;
+import cl.duoc.albumes_service.clients.CancionClient;
+import cl.duoc.albumes_service.mapper.AlbumMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,56 +23,63 @@ public class AlbumService {
     @Autowired
     private AlbumMapper mapper;
 
+
+
     public List<AlbumDTO> findAll() {
-        List<AlbumDTO> listado = new ArrayList<>();
+        List<AlbumDTO> albumesDTO = new ArrayList<>();
 
-        for(Album a : albumRepository.findAll()) {
+        for(Album album : albumRepository.findAll()) {
             List<Long> idCanciones = new ArrayList<>();
-            for (CancionDTO c : cancionClient.findAllListCanciones(a.getId())) {
-                idCanciones.add(c.getIdCancion());
+
+            for (CancionDTO cancionDTO : cancionClient.findAllCancionesByAlbum(album.getId())) {
+                idCanciones.add(cancionDTO.getIdCancion());
             }
-            AlbumDTO a_dto = mapper.toDTO(a, idCanciones);
-            listado.add(a_dto);
+
+            AlbumDTO albumDTO = mapper.toDTO(album, idCanciones);
+            albumesDTO.add(albumDTO);
         }
 
-        return listado;
+        return albumesDTO;
     }
 
-    public AlbumDTO findById(Long id) {
+    public AlbumDTO findById(Long idAlbum) {
         List<Long> idCanciones = new ArrayList<>();
-        for (CancionDTO c : cancionClient.findAllListCanciones(id)) {
-            idCanciones.add(c.getIdCancion());
+
+        for (CancionDTO cancionDTO : cancionClient.findAllCancionesByAlbum(idAlbum)) {
+            idCanciones.add(cancionDTO.getIdCancion());
         }
-        Album a =  albumRepository.findById(id).orElse(null);
-        return mapper.toDTO(a, idCanciones);
+
+        Album album =  albumRepository.findById(idAlbum).orElse(null);
+
+        return mapper.toDTO(album, idCanciones);
     }
 
-    public Album save(Album a) {
-        return albumRepository.save(a);
+    public Album save(Album album) {
+        return albumRepository.save(album);
     }
 
-    public Album update(Long id, Album a) {
-        if ( albumRepository.existsById(id) ) {
+    public Album update(Long idAlbum, Album albumNuevo) {
+        if (albumRepository.existsById(idAlbum)) {
+            Album album = albumRepository.findById(idAlbum).orElse(null);
 
-            Album album = albumRepository.findById(id).orElse(null);
-            album.setNombre(a.getNombre());
-            album.setDescripcion(a.getDescripcion());
-            album.setFechaLanzamiento(a.getFechaLanzamiento());
-            album.setTipoAlbum(a.getTipoAlbum());
+            album.setNombre(albumNuevo.getNombre());
+            album.setDescripcion(albumNuevo.getDescripcion());
+            album.setFechaLanzamiento(albumNuevo.getFechaLanzamiento());
+            album.setTipoAlbum(albumNuevo.getTipoAlbum());
 
             return albumRepository.save(album);
-
         } else {
             return null;
         }
     }
 
-    public Boolean deleteById(Long id) {
-        if(albumRepository.existsById(id)) {
-            albumRepository.deleteById(id);
+    public Boolean deleteById(Long idAlbum) {
+        if(albumRepository.existsById(idAlbum)) {
+            albumRepository.deleteById(idAlbum);
             return true;
         } else {
             return false;
         }
     }
+
 }

@@ -14,34 +14,36 @@ public class TipoAlbumService {
     @Autowired
     private TipoAlbumRepository tipoAlbumRepository;
 
+
+
     public List<TipoAlbum> findAll() {
         return tipoAlbumRepository.findAll();
     }
 
-    public Optional<TipoAlbum> findById(Long id) { return tipoAlbumRepository.findById(id); }
-
-    public TipoAlbum save(TipoAlbum tp) {
-        return tipoAlbumRepository.save(tp);
+    public Optional<TipoAlbum> findById(Long idTipoAlbum) {
+        return tipoAlbumRepository.findById(idTipoAlbum);
     }
 
-    public TipoAlbum update(Long id, TipoAlbum tp) {
-        if (tipoAlbumRepository.existsById(id)) {
-            TipoAlbum tipoAlbum = tipoAlbumRepository.findById(id).orElse(null);
-            tipoAlbum.setNombre(tp.getNombre());
+    public TipoAlbum save(TipoAlbum tipoAlbum) {
+        return tipoAlbumRepository.save(tipoAlbum);
+    }
+
+    public TipoAlbum update(Long idTipoAlbum, TipoAlbum tipoAlbumNuevo) {
+        if (tipoAlbumRepository.existsById(idTipoAlbum)) {
+            TipoAlbum tipoAlbum = tipoAlbumRepository.findById(idTipoAlbum).orElse(null);
+
+            tipoAlbum.setNombre(tipoAlbumNuevo.getNombre());
 
             return tipoAlbumRepository.save(tipoAlbum);
-
         } else {
             return null;
         }
     }
 
-    public Boolean deleteById(Long id) {
-        if (tipoAlbumRepository.existsById(id)) {
-
-            tipoAlbumRepository.deleteById(id);
+    public Boolean deleteById(Long idTipoAlbum) {
+        if (tipoAlbumRepository.existsById(idTipoAlbum)) {
+            tipoAlbumRepository.deleteById(idTipoAlbum);
             return true;
-
         } else {
             return false;
         }

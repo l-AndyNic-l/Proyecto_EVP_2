@@ -1,15 +1,12 @@
 package cl.duoc.canciones_service.service;
 
-import cl.duoc.canciones_service.clients.AlbumClient;
-import cl.duoc.canciones_service.clients.PlaylistClient;
 import cl.duoc.canciones_service.model.Cancion;
-import cl.duoc.canciones_service.mapper.CancionMapper;
-import cl.duoc.canciones_service.dto.CancionDTO;
 import cl.duoc.canciones_service.repository.CancionRepository;
-import com.netflix.discovery.converters.Auto;
+import cl.duoc.canciones_service.dto.CancionDTO;
+import cl.duoc.canciones_service.clients.AlbumClient;
+import cl.duoc.canciones_service.mapper.CancionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,81 +20,67 @@ public class CancionService {
     private AlbumClient albumClient;
 
     @Autowired
-    private PlaylistClient playlistClient;
-
-    @Autowired
     private CancionMapper mapper;
 
-    public List<CancionDTO> findAll() {
-        List<CancionDTO> listado = new ArrayList<>();
 
-        for(Cancion c : cancionRepository.findAll()) {
-            CancionDTO c_dto = mapper.toDTO(c);
-            listado.add(c_dto);
+
+    public List<CancionDTO> findAll() {
+        List<CancionDTO> cancionesDTO = new ArrayList<>();
+
+        for(Cancion cancion : cancionRepository.findAll()) {
+            CancionDTO cancionDTO = mapper.toDTO(cancion);
+            cancionesDTO.add(cancionDTO);
         }
 
-        return listado;
+        return cancionesDTO;
     }
 
-    public CancionDTO findById(Long id) {
-        Cancion s =  cancionRepository.findById(id).orElse(null);
-        return mapper.toDTO(s);
+    public CancionDTO findById(Long idCancion) {
+        Cancion cancion = cancionRepository.findById(idCancion).orElse(null);
+        return mapper.toDTO(cancion);
     }
 
-    public List<CancionDTO> findAllAlbumCanciones(Long idAlbum) {
+    public List<CancionDTO> findAllCancionesByAlbum(Long idAlbum) {
         List<CancionDTO> albumCanciones = new ArrayList<>();
-        for(Cancion c : cancionRepository.findAll()) {
-            CancionDTO c_dto = mapper.toDTO(c);
-            if (c_dto.getIdAlbum() == idAlbum) {
-                albumCanciones.add(c_dto);
+
+        for(Cancion cancion : cancionRepository.findAll()) {
+            CancionDTO cancionDTO = mapper.toDTO(cancion);
+
+            if (cancionDTO.getIdAlbum() == idAlbum) {
+                albumCanciones.add(cancionDTO);
             }
         }
 
         return albumCanciones;
     }
 
-    public List<CancionDTO> findAllPlaylistCanciones(Long idPlaylist) {
-        List<CancionDTO> playlistCanciones = new ArrayList<>();
-        for(Cancion c : cancionRepository.findAll()) {
-            CancionDTO c_dto = mapper.toDTO(c);
-            for (Long id : c_dto.getIdPlaylists()) {
-                if (id == idPlaylist) {
-                    playlistCanciones.add(c_dto);
-                }
-            }
-        }
-        return playlistCanciones;
+    public Cancion save(Cancion cancion) {
+        return cancionRepository.save(cancion);
     }
 
-    public Cancion save(Cancion c) {
-        return cancionRepository.save(c);
-    }
+    public Cancion update(Long idCancion, Cancion cancionNueva) {
+        if (cancionRepository.existsById(idCancion)) {
 
-    public Cancion update(Long id, Cancion c) {
+            albumClient.findById(cancionNueva.getIdAlbum());
 
-        if ( cancionRepository.existsById(id) ) {
+            Cancion cancion = cancionRepository.findById(idCancion).orElse(null);
 
-            albumClient.findById(c.getIdAlbum());
-
-            Cancion cancion = cancionRepository.findById(id).orElse(null);
-
-            cancion.setAutor(c.getAutor());
-            cancion.setTitulo(c.getTitulo());
-            cancion.setDuracion(c.getDuracion());
-            cancion.setFechaLanzamiento(c.getFechaLanzamiento());
-            cancion.setGenero(c.getGenero());
-            cancion.setIdAlbum(c.getIdAlbum());
+            cancion.setAutor(cancionNueva.getAutor());
+            cancion.setTitulo(cancionNueva.getTitulo());
+            cancion.setDuracion(cancionNueva.getDuracion());
+            cancion.setFechaLanzamiento(cancionNueva.getFechaLanzamiento());
+            cancion.setGenero(cancionNueva.getGenero());
+            cancion.setIdAlbum(cancionNueva.getIdAlbum());
 
             return cancionRepository.save(cancion);
-
         } else {
             return null;
         }
     }
 
-    public Boolean deleteById(Long id) {
-        if(cancionRepository.existsById(id)) {
-            cancionRepository.deleteById(id);
+    public Boolean deleteById(Long idCancion) {
+        if(cancionRepository.existsById(idCancion)) {
+            cancionRepository.deleteById(idCancion);
             return true;
         } else {
             return false;

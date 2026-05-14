@@ -4,7 +4,6 @@ import cl.duoc.canciones_service.model.Genero;
 import cl.duoc.canciones_service.service.GeneroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -15,29 +14,31 @@ public class GeneroController {
     @Autowired
     private GeneroService generoService;
 
+
+
     @GetMapping
     public List<Genero> findAll() {
         return generoService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Optional<Genero> findById(@PathVariable Long id) {
-        return generoService.findById(id);
+    @GetMapping("/{idGenero}")
+    public Optional<Genero> findById(@PathVariable Long idGenero) {
+        return generoService.findById(idGenero);
     }
 
     @PostMapping
-    public Genero save(@RequestBody Genero g) {
-        return generoService.save(g);
+    public Genero save(@RequestBody Genero genero) {
+        return generoService.save(genero);
     }
 
-    @PutMapping("/{id}")
-    public Genero update(@PathVariable Long id, @RequestBody Genero g) {
-        return generoService.update(id, g);
+    @PutMapping("/{idGenero}")
+    public Genero update(@PathVariable Long idGenero, @RequestBody Genero genero) {
+        return generoService.update(idGenero, genero);
     }
 
-    @DeleteMapping("/{id}")
-    public Boolean delete(@PathVariable  Long id) {
-        return generoService.deleteById(id);
+    @DeleteMapping("/{idGenero}")
+    public Boolean delete(@PathVariable  Long idGenero) {
+        return generoService.deleteById(idGenero);
     }
 
 }

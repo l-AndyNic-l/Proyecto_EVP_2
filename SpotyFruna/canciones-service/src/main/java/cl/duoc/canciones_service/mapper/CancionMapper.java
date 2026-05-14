@@ -1,7 +1,7 @@
 package cl.duoc.canciones_service.mapper;
 
-import cl.duoc.canciones_service.dto.CancionDTO;
 import cl.duoc.canciones_service.model.Cancion;
+import cl.duoc.canciones_service.dto.CancionDTO;
 import org.springframework.stereotype.Component;
 
 @Component

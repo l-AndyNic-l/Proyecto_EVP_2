@@ -1,8 +1,8 @@
 package cl.duoc.auth_service.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -14,22 +14,22 @@ import java.time.LocalDateTime;
 public class Auth {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column( nullable = false )
+    @Column(nullable = false)
     private Long usuario;
 
     @ManyToOne
-    @JoinColumn( name = "id_estado", nullable = false )
+    @JoinColumn(name = "id_estado", nullable = false)
     private Estado estado;
 
-    @Column( nullable = false, unique = true )
+    @Column(nullable = false, unique = true)
     private String token;
 
     private LocalDateTime fechaRegistro = LocalDateTime.now();
 
-    @Column( nullable = true )
+    @Column(nullable = true)
     private LocalDateTime fechaExpiracion;
 
 }

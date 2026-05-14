@@ -15,29 +15,31 @@ public class SuscripcionController {
     @Autowired
     private SuscripcionService suscripcionService;
 
+
+
     @GetMapping
     public List<SuscripcionDTO> findAll() {
         return suscripcionService.findAll();
     }
 
     @GetMapping("/{id}")
-    public SuscripcionDTO findById(@PathVariable Long id) {
-        return suscripcionService.findById(id);
+    public SuscripcionDTO findById(@PathVariable Long idSuscripcion) {
+        return suscripcionService.findById(idSuscripcion);
     }
 
     @PostMapping
-    public Suscripcion save(@RequestBody Suscripcion s) {
-        return suscripcionService.save(s);
+    public Suscripcion save(@RequestBody Suscripcion suscripcion) {
+        return suscripcionService.save(suscripcion);
     }
 
     @PutMapping("/{id}")
-    public Suscripcion update(@PathVariable Long id, @RequestBody Suscripcion s ) {
-        return suscripcionService.update(id, s);
+    public Suscripcion update(@PathVariable Long idSuscripcion, @RequestBody Suscripcion suscripcion ) {
+        return suscripcionService.update(idSuscripcion, suscripcion);
     }
 
     @DeleteMapping("/{id}")
-    public Boolean delete(@PathVariable  Long id) {
-        return suscripcionService.deleteById(id);
+    public Boolean delete(@PathVariable Long idSuscripcion) {
+        return suscripcionService.deleteById(idSuscripcion);
     }
 
 }

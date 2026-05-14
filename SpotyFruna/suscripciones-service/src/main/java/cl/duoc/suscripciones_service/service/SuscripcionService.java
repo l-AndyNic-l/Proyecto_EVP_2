@@ -1,10 +1,10 @@
 package cl.duoc.suscripciones_service.service;
 
-import cl.duoc.suscripciones_service.clients.UsuarioClient;
 import cl.duoc.suscripciones_service.model.Suscripcion;
-import cl.duoc.suscripciones_service.mapper.SuscripcionMapper;
-import cl.duoc.suscripciones_service.dto.SuscripcionDTO;
 import cl.duoc.suscripciones_service.repository.SuscripcionRepository;
+import cl.duoc.suscripciones_service.dto.SuscripcionDTO;
+import cl.duoc.suscripciones_service.clients.UsuarioClient;
+import cl.duoc.suscripciones_service.mapper.SuscripcionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,50 +23,51 @@ public class SuscripcionService {
     @Autowired
     private SuscripcionMapper mapper;
 
-    public List<SuscripcionDTO> findAll() {
-        List<SuscripcionDTO> listado = new ArrayList<>();
 
-        for(Suscripcion s : suscripcionRepository.findAll()) {
-            SuscripcionDTO s_dto = mapper.toDTO(s);
-            listado.add(s_dto);
+
+    public List<SuscripcionDTO> findAll() {
+        List<SuscripcionDTO> suscripcionesDTO = new ArrayList<>();
+
+        for(Suscripcion suscripcion : suscripcionRepository.findAll()) {
+            SuscripcionDTO suscripcionDTO = mapper.toDTO(suscripcion);
+            suscripcionesDTO.add(suscripcionDTO);
         }
 
-        return listado;
+        return suscripcionesDTO;
     }
 
-    public SuscripcionDTO findById(Long id) {
-        Suscripcion s =  suscripcionRepository.findById(id).orElse(null);
-        return mapper.toDTO(s);
+    public SuscripcionDTO findById(Long idSuscripcion) {
+        Suscripcion suscripcion =  suscripcionRepository.findById(idSuscripcion).orElse(null);
+        return mapper.toDTO(suscripcion);
     }
 
-    public Suscripcion save(Suscripcion s) {
-        usuarioClient.findById(s.getId_usuario());
-        return suscripcionRepository.save(s);
+    public Suscripcion save(Suscripcion suscripcion) {
+        usuarioClient.findById(suscripcion.getIdUsuario());
+        return suscripcionRepository.save(suscripcion);
     }
 
-    public Suscripcion update(Long id, Suscripcion s) {
+    public Suscripcion update(Long idSuscripcion, Suscripcion suscripcionNueva) {
 
-        if (suscripcionRepository.existsById(id)) {
+        if (suscripcionRepository.existsById(idSuscripcion)) {
+            usuarioClient.findById(suscripcionNueva.getIdUsuario());
 
-            usuarioClient.findById(s.getId_usuario());
+            Suscripcion suscripcion = suscripcionRepository.findById(idSuscripcion).orElse(null);
 
-            Suscripcion suscripcion = suscripcionRepository.findById(id).orElse(null);
-            suscripcion.setFechaInicio(s.getFechaInicio());
-            suscripcion.setFechaTermino(s.getFechaTermino());
-            suscripcion.setActivado(s.getActivado());
-            suscripcion.setPlan(s.getPlan());
-            suscripcion.setId_usuario(s.getId_usuario());
+            suscripcion.setFechaInicio(suscripcionNueva.getFechaInicio());
+            suscripcion.setFechaTermino(suscripcionNueva.getFechaTermino());
+            suscripcion.setActivado(suscripcionNueva.getActivado());
+            suscripcion.setPlan(suscripcionNueva.getPlan());
+            suscripcion.setIdUsuario(suscripcionNueva.getIdUsuario());
 
             return suscripcionRepository.save(suscripcion);
-
         } else {
             return null;
         }
     }
 
-    public Boolean deleteById(Long id) {
-        if(suscripcionRepository.existsById(id)) {
-            suscripcionRepository.deleteById(id);
+    public Boolean deleteById(Long idSuscripcion) {
+        if(suscripcionRepository.existsById(idSuscripcion)) {
+            suscripcionRepository.deleteById(idSuscripcion);
             return true;
         } else {
             return false;

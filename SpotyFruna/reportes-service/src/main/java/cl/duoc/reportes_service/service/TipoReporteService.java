@@ -12,36 +12,36 @@ public class TipoReporteService {
     @Autowired
     private TipoReporteRepository tipoReporteRepository;
 
+
+
     public List<TipoReporte> findAll() {
         return tipoReporteRepository.findAll();
     }
 
-    public TipoReporte findByNombre( String nombre ) {
-        return tipoReporteRepository.findByNombre( nombre );
+    public TipoReporte findByNombre(String nombre) {
+        return tipoReporteRepository.findByNombre(nombre);
     }
 
-    public TipoReporte save( TipoReporte tipoReporte ) {
-        return tipoReporteRepository.save( tipoReporte );
+    public TipoReporte save(TipoReporte tipoReporte) {
+        return tipoReporteRepository.save(tipoReporte);
     }
 
-    public TipoReporte update( Long id, TipoReporte t ) {
-        if ( tipoReporteRepository.existsById( id ) ) {
-            TipoReporte tipoReporte = tipoReporteRepository.findById( id ).orElse(null);
-            tipoReporte.setNombre( t.getNombre() );
+    public TipoReporte update(Long idTipoReporte, TipoReporte tipoReporteNuevo) {
+        if ( tipoReporteRepository.existsById(idTipoReporte)) {
+            TipoReporte tipoReporte = tipoReporteRepository.findById(idTipoReporte).orElse(null);
 
-            return tipoReporteRepository.save( tipoReporte );
+            tipoReporte.setNombre(tipoReporteNuevo.getNombre());
 
-        } else  {
+            return tipoReporteRepository.save(tipoReporte);
+        } else {
             return null;
         }
     }
 
-    public Boolean deleteById(Long id) {
-        if ( tipoReporteRepository.existsById(id) ) {
-
-            tipoReporteRepository.deleteById(id);
+    public Boolean deleteById(Long idTipoReporte) {
+        if (tipoReporteRepository.existsById(idTipoReporte)) {
+            tipoReporteRepository.deleteById(idTipoReporte);
             return true;
-
         } else {
             return false;
         }

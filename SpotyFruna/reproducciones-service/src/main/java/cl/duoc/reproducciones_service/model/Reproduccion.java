@@ -2,10 +2,9 @@ package cl.duoc.reproducciones_service.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
 
 @Data
@@ -28,10 +27,10 @@ public class Reproduccion {
     @JoinColumn( name = "id_dispositivo", nullable = false )
     private Dispositivo dispositivo;
 
-    @Column( nullable = false )
+    @Column(nullable = false)
     private Long cancion;
 
-    @Column( nullable = false )
+    @Column(nullable = false)
     private Long usuario;
 
 }

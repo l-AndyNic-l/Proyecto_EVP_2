@@ -12,36 +12,36 @@ public class EstadoService {
     @Autowired
     private EstadoRepository estadoRepository;
 
+
+
     public List<Estado> findAll() {
         return estadoRepository.findAll();
     }
 
-    public Estado findByNombre( String nombre ) {
-        return estadoRepository.findByNombre( nombre );
+    public Estado findByNombre(String nombre) {
+        return estadoRepository.findByNombre(nombre);
     }
 
-    public Estado save( Estado estado ) {
-        return estadoRepository.save( estado );
+    public Estado save(Estado estado) {
+        return estadoRepository.save(estado);
     }
 
-    public Estado update( Long id, Estado e ) {
-        if ( estadoRepository.existsById( id ) ) {
-            Estado estado = estadoRepository.findById( id ).orElse(null);
-            estado.setNombre( e.getNombre() );
+    public Estado update(Long idEstado, Estado estadoNuevo) {
+        if (estadoRepository.existsById(idEstado)) {
+            Estado estado = estadoRepository.findById(idEstado).orElse(null);
 
-            return estadoRepository.save( estado );
+            estado.setNombre(estadoNuevo.getNombre());
 
-        } else  {
+            return estadoRepository.save(estado);
+        } else {
             return null;
         }
     }
 
-    public Boolean deleteById(Long id) {
-        if ( estadoRepository.existsById(id) ) {
-
-            estadoRepository.deleteById(id);
+    public Boolean deleteById(Long idEstado) {
+        if ( estadoRepository.existsById(idEstado) ) {
+            estadoRepository.deleteById(idEstado);
             return true;
-
         } else {
             return false;
         }

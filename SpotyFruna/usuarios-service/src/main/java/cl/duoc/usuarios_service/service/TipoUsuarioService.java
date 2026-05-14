@@ -13,6 +13,8 @@ public class TipoUsuarioService {
     @Autowired
     private TipoUsuarioRepository tipoUsuarioRepository;
 
+
+
     public List<TipoUsuario> findAll() {
         return tipoUsuarioRepository.findAll();
     }
@@ -25,24 +27,21 @@ public class TipoUsuarioService {
         return tipoUsuarioRepository.save(tipoUsuario);
     }
 
-    public TipoUsuario update(Long id, TipoUsuario tipoUsuario) {
-        if ( tipoUsuarioRepository.existsById(id) ) {
-            TipoUsuario tipoExistente = tipoUsuarioRepository.findById(id).orElse(null);
-            tipoExistente.setNombre(tipoUsuario.getNombre());
+    public TipoUsuario update(Long idTipoUsuario, TipoUsuario tipoUsuarioNuevo) {
+        if (tipoUsuarioRepository.existsById(idTipoUsuario)) {
+            TipoUsuario tipoUsuario = tipoUsuarioRepository.findById(idTipoUsuario).orElse(null);
+            tipoUsuario.setNombre(tipoUsuarioNuevo.getNombre());
 
-            return tipoUsuarioRepository.save(tipoExistente);
-
+            return tipoUsuarioRepository.save(tipoUsuario);
         } else {
             return null;
         }
     }
 
-    public Boolean deleteById(Long id) {
-        if ( tipoUsuarioRepository.existsById(id) ) {
-
-            tipoUsuarioRepository.deleteById(id);
+    public Boolean deleteById(Long idTipoUsuario) {
+        if (tipoUsuarioRepository.existsById(idTipoUsuario)) {
+            tipoUsuarioRepository.deleteById(idTipoUsuario);
             return true;
-
         } else {
             return false;
         }

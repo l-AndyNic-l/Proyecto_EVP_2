@@ -1,9 +1,9 @@
 package cl.duoc.reproducciones_service.mapper;
 
-import cl.duoc.reproducciones_service.dto.CancionDTO;
-import cl.duoc.reproducciones_service.dto.ReproduccionDTO;
-import cl.duoc.reproducciones_service.dto.UsuarioDTO;
 import cl.duoc.reproducciones_service.model.Reproduccion;
+import cl.duoc.reproducciones_service.dto.ReproduccionDTO;
+import cl.duoc.reproducciones_service.dto.CancionDTO;
+import cl.duoc.reproducciones_service.dto.UsuarioDTO;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
@@ -11,11 +11,9 @@ import java.text.SimpleDateFormat;
 @Component
 public class ReproduccionMapper {
 
-    public ReproduccionDTO toDTO( Reproduccion r, CancionDTO c, UsuarioDTO u ) {
-
+    public ReproduccionDTO toDTO(Reproduccion r, CancionDTO c, UsuarioDTO u) {
         if ( r == null ) {
             return null;
-
         }
 
         SimpleDateFormat sdf = new SimpleDateFormat( "dd/MM/yyyy HH:mm:ss" );

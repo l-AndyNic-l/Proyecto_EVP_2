@@ -7,20 +7,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping( "/api/v1/tipos-reportes" )
+@RequestMapping("/api/v1/tipos-reportes")
 public class TipoReporteController {
 
     @Autowired
     private TipoReporteService tipoReporteService;
+
+
 
     @GetMapping
     public List<TipoReporte> findAll() {
         return tipoReporteService.findAll();
     }
 
-    @GetMapping( "/{tipo}" )
-    public TipoReporte findOne(@PathVariable String tipo) {
-        return tipoReporteService.findByNombre(tipo);
+    @GetMapping("/{tipoReporte}")
+    public TipoReporte findOne(@PathVariable String tipoReporte) {
+        return tipoReporteService.findByNombre(tipoReporte);
     }
 
     @PostMapping
@@ -28,14 +30,14 @@ public class TipoReporteController {
         return tipoReporteService.save(tipoReporte);
     }
 
-    @PutMapping( "/{id}" )
-    public TipoReporte update(@PathVariable Long id, @RequestBody TipoReporte tipoReporte) {
-        return tipoReporteService.update(id, tipoReporte);
+    @PutMapping( "/{idTipoReporte}" )
+    public TipoReporte update(@PathVariable Long idTipoReporte, @RequestBody TipoReporte tipoReporte) {
+        return tipoReporteService.update(idTipoReporte, tipoReporte);
     }
 
-    @DeleteMapping( "/{id}" )
-    public Boolean deleteById(@PathVariable Long id){
-        return tipoReporteService.deleteById(id);
+    @DeleteMapping( "/{idTipoReporte}" )
+    public Boolean deleteById(@PathVariable Long idTipoReporte){
+        return tipoReporteService.deleteById(idTipoReporte);
     }
 
 }

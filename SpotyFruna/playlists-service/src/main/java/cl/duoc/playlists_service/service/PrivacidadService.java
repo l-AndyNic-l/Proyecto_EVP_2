@@ -4,7 +4,6 @@ import cl.duoc.playlists_service.model.Privacidad;
 import cl.duoc.playlists_service.repository.PrivacidadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -14,34 +13,34 @@ public class PrivacidadService {
     @Autowired
     private PrivacidadRepository privacidadRepository;
 
+
+
     public List<Privacidad> findAll() {
         return privacidadRepository.findAll();
     }
 
-    public Optional<Privacidad> findById(Long id) { return privacidadRepository.findById(id); }
+    public Optional<Privacidad> findById(Long idPrivacidad) { return privacidadRepository.findById(idPrivacidad); }
 
-    public Privacidad save(Privacidad p) {
-        return privacidadRepository.save(p);
+    public Privacidad save(Privacidad privacidad) {
+        return privacidadRepository.save(privacidad);
     }
 
-    public Privacidad update(Long id, Privacidad p) {
-        if (privacidadRepository.existsById(id)) {
-            Privacidad privacidad = privacidadRepository.findById(id).orElse(null);
-            privacidad.setNombre(p.getNombre());
+    public Privacidad update(Long idPrivacidad, Privacidad privacidadNueva) {
+        if (privacidadRepository.existsById(idPrivacidad)) {
+            Privacidad privacidad = privacidadRepository.findById(idPrivacidad).orElse(null);
+
+            privacidad.setNombre(privacidadNueva.getNombre());
 
             return privacidadRepository.save(privacidad);
-
         } else {
             return null;
         }
     }
 
-    public Boolean deleteById(Long id) {
-        if (privacidadRepository.existsById(id)) {
-
-            privacidadRepository.deleteById(id);
+    public Boolean deleteById(Long idPrivacidad) {
+        if (privacidadRepository.existsById(idPrivacidad)) {
+            privacidadRepository.deleteById(idPrivacidad);
             return true;
-
         } else {
             return false;
         }

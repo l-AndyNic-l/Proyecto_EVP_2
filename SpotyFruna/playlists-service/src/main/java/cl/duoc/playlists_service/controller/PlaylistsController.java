@@ -5,7 +5,6 @@ import cl.duoc.playlists_service.model.Playlist;
 import cl.duoc.playlists_service.service.PlaylistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -15,29 +14,31 @@ public class PlaylistsController {
     @Autowired
     private PlaylistService playlistService;
 
+
+
     @GetMapping
     public List<PlaylistDTO> findAll() {
         return playlistService.findAll();
     }
 
-    @GetMapping( "/{id}" )
-    public PlaylistDTO findById(@PathVariable Long id) {
-        return playlistService.findById(id);
+    @GetMapping( "/{idPlaylist}" )
+    public PlaylistDTO findById(@PathVariable Long idPlaylist) {
+        return playlistService.findById(idPlaylist);
     }
 
     @PostMapping
-    public Playlist save(@RequestBody Playlist c) {
-        return playlistService.save(c);
+    public Playlist save(@RequestBody Playlist playlist) {
+        return playlistService.save(playlist);
     }
 
-    @PutMapping( "/{id}" )
-    public Playlist update(@PathVariable Long id, @RequestBody Playlist p) {
-        return playlistService.update(id, p);
+    @PutMapping( "/{idPlaylist}" )
+    public Playlist update(@PathVariable Long idPlaylist, @RequestBody Playlist playlist) {
+        return playlistService.update(idPlaylist, playlist);
     }
 
-    @DeleteMapping("/{id}")
-    public Boolean delete(@PathVariable Long id) {
-        return playlistService.deleteById(id);
+    @DeleteMapping("/{idPlaylist}")
+    public Boolean delete(@PathVariable Long idPlaylist) {
+        return playlistService.deleteById(idPlaylist);
     }
 
 

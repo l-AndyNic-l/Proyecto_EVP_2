@@ -6,7 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DispositivoRepository extends JpaRepository<Dispositivo, Long> {
-
     Dispositivo findByNombre( String nombre );
-
 }

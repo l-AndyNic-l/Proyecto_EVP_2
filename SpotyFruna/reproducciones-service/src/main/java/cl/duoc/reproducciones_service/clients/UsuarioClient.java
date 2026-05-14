@@ -5,10 +5,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient( name = "usuarios-service", url = "http://localhost:8080/api/v1/usuarios-service" )
-public interface UsuarioFeing {
+@FeignClient(name = "usuarios-service", url = "http://localhost:8080/api/v1/usuarios-service")
+public interface UsuarioClient {
 
-    @GetMapping( "/{id}" )
-    UsuarioDTO findById( @PathVariable Long id );
+    @GetMapping("/{idUsuario}")
+    UsuarioDTO findById(@PathVariable Long idUsuario);
 
 }

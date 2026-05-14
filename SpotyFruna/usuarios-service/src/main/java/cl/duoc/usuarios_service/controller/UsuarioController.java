@@ -14,29 +14,31 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+
+
     @GetMapping
     public List<UsuarioDTO> findAll() {
         return usuarioService.findAll();
     }
 
-    @GetMapping( "/{id}" )
-    public UsuarioDTO findById( @PathVariable  Long id ) {
-        return usuarioService.findById(id);
+    @GetMapping( "/{idUsuario}" )
+    public UsuarioDTO findById( @PathVariable Long idUsuario) {
+        return usuarioService.findById(idUsuario);
     }
 
     @PostMapping
-    public Usuario save( @RequestBody Usuario u ) {
-        return usuarioService.save(u);
+    public Usuario save( @RequestBody Usuario usuario) {
+        return usuarioService.save(usuario);
     }
 
-    @PutMapping( "/{id}" )
-    public Usuario update( @PathVariable  Long id, @RequestBody Usuario u ) {
-        return usuarioService.update(id, u);
+    @PutMapping( "/{idUsuario}" )
+    public Usuario update( @PathVariable Long idUsuario, @RequestBody Usuario usuario) {
+        return usuarioService.update(idUsuario, usuario);
     }
 
-    @DeleteMapping( "/{id}" )
-    public Boolean delete( @PathVariable  Long id ) {
-        return usuarioService.deleteById(id);
+    @DeleteMapping( "/{idUsuario}" )
+    public Boolean delete( @PathVariable Long idUsuario) {
+        return usuarioService.deleteById(idUsuario);
     }
 
 }

@@ -6,7 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TipoReporteRepository extends JpaRepository<TipoReporte, Long> {
-
-    TipoReporte findByNombre(String nombre );
-
+    TipoReporte findByNombre(String nombre);
 }
